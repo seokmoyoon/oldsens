@@ -1,8 +1,15 @@
+export const seasons=[
+{id:'christmas',name:'크리스마스',title:'Merry Christmas',message:'따뜻하고 행복한 크리스마스 보내세요.',accent:'#873c36',prompt:'Subtle evergreen branches, winter warmth, restrained burgundy and pine green accents.'},
+{id:'newyear',name:'새해',title:'Happy New Year 2027',message:'새해에도 행복한 순간이 가득하길 바랍니다.',accent:'#9a713b',prompt:'Quiet dawn, warm gold and muted blue accents, hopeful new year atmosphere.'},
+{id:'seollal',name:'설날',title:'새해 복 많이 받으세요',message:'건강과 행복이 가득한 한 해 되세요.',accent:'#395c68',prompt:'Refined Korean traditional paper and restrained minhwa-inspired decorative accents.'}
+];
+const base='Create one refined illustration from the uploaded photograph. Preserve recognizable identity, pose, relationships and important objects. Simplify distracting background details, use intentional negative space and a coherent palette derived from the photo. Do not invent people or add letters, logos, borders, stamps or typography. The artwork will be composed into a postcard separately.';
 export const styles=[
-{id:'geometry',name:'기하학 아트',prompt:'Reconstruct the photo using only simple circles, semicircles, triangles and rectangles. Flat colors, minimal geometric poster, preserve recognizable composition.'},
-{id:'postcard',name:'빈티지 엽서',prompt:'Vintage travel postcard illustration, muted inks, subtle paper grain, simplified landscape and subjects.'},
-{id:'pencil',name:'색연필',prompt:'Soft colored pencil illustration on ivory paper, gentle strokes and warm nostalgic mood.'},
-{id:'block',name:'컬러 블록',prompt:'Minimal flat color block illustration, clean silhouettes, limited palette, no outlines.'},
-{id:'riso',name:'리소그래프',prompt:'Risograph print, limited ink palette, subtle misregistration and grain.'},
-{id:'paper',name:'페이퍼 아트',prompt:'Layered cut paper collage, simple organic silhouettes, subtle paper texture.'}
+{id:'geometry',name:'기하학 아트',prompt:base+' Build the composition from circles, arcs, triangles and rectangles. Use four to six flat colors, clear silhouettes, balanced asymmetry, no gradients.'},
+{id:'postcard',name:'빈티지 엽서',prompt:base+' Use mid-century lithographic travel illustration, muted inks, fine paper grain, simplified shapes and warm ivory highlights. Avoid heavy distress and photorealism.'},
+{id:'pencil',name:'색연필',prompt:base+' Use delicate colored pencil strokes, soft hatching and visible ivory paper. Leave generous unpainted areas and retain expressive facial features.'},
+{id:'block',name:'컬러 블록',prompt:base+' Use clean flat silhouettes and a limited palette, no heavy outlines, deliberate visual hierarchy and editorial composition.'},
+{id:'riso',name:'리소그래프',prompt:base+' Use two to four ink colors, fine halftone grain and subtle registration shifts. Keep contrast readable and avoid muddy overlap.'},
+{id:'paper',name:'페이퍼 아트',prompt:base+' Use layered cut-paper shapes with restrained shallow shadows, tactile edges and a harmonious palette.'},
+{id:'sketch',name:'건축 스케치',prompt:base+' Reinterpret essential contours and spatial relationships as a sparse architectural concept drawing. Use loose graphite lines, occasional construction guides, selective washes in two to four colors and expansive blank ivory space. Omit secondary scenery.'}
 ];
