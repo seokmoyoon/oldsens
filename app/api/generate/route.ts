@@ -1,4 +1,4 @@
-import {styles,seasons,layouts,ratios,textModes} from '../../styles';
+import {styles,seasons,layouts,ratios,textModes,buildPrompt} from '../../styles';
 export const runtime='nodejs';
 export const maxDuration=60;
 export async function POST(req:Request){
@@ -9,8 +9,7 @@ if(!(file instanceof File)||file.size>3000000||!['image/jpeg','image/png','image
 const season=seasons.find(s=>s.id===form.get('season'));
 const layout=layouts.find(l=>l.id===form.get('layout')),ratio=String(form.get('ratio')||''),mode=String(form.get('textMode')||''),caption=String(form.get('caption')||'').trim();
 if(!season||!layout||!ratios.includes(ratio)||!textModes.includes(mode)||caption.length>100||(mode==='custom'&&!caption))return Response.json({error:'엽서 설정을 확인하세요.'},{status:400});
-const typography=mode==='none'?'Do not render any text, letters, logos or numbers.':mode==='custom'?'Render only the following exact greeting as integrated typography, preserving spelling and language: '+JSON.stringify(caption):'Create one short tasteful seasonal greeting in Korean or English, with legible editorial typography. No other text or logos.';
-const prompt=[style.prompt,season.prompt,layout.prompt,typography,'Output exactly one finished flat postcard artwork, not a mockup, with aspect ratio '+ratio+'. No external frame, hands holding a card, or unrelated objects.'].join('\n');
+const prompt=buildPrompt({style:style.id,season:season.id,layout:layout.id,ratio,textMode:mode,caption});
 const model=process.env.GEMINI_IMAGE_MODEL||'gemini-2.5-flash-image';
 const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key.trim()},body:JSON.stringify({contents:[{parts:[{text:prompt},{inlineData:{mimeType:file.type,data:Buffer.from(await file.arrayBuffer()).toString('base64')}}]}],generationConfig:{responseModalities:['TEXT','IMAGE'],imageConfig:{aspectRatio:ratio}}}),signal:AbortSignal.timeout(50000)});
 if(!res.ok)return Response.json({error:'Gemini 요청 실패 ('+res.status+'). API 키, 결제 및 모델 설정을 확인하세요.'},{status:502});
