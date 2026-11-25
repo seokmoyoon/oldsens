@@ -20,3 +20,10 @@ export const layouts=[
 ];
 export const ratios=['3:4','4:5','1:1','9:16'];
 export const textModes=['auto','custom','none'];
+
+export function buildPrompt(options:{style:string;season:string;layout:string;ratio:string;textMode:string;caption:string}){
+const style=styles.find(s=>s.id===options.style),season=seasons.find(s=>s.id===options.season),layout=layouts.find(l=>l.id===options.layout),ratio=options.ratio,mode=options.textMode,caption=options.caption.trim();
+if(!style||!season||!layout||!ratios.includes(ratio)||!textModes.includes(mode)||caption.length>100||(mode==='custom'&&!caption))throw new Error('엽서 설정을 확인하세요.');
+const typography=mode==='none'?'Do not render any text, letters, logos or numbers.':mode==='custom'?'Render only the following exact greeting as integrated typography, preserving spelling and language: '+JSON.stringify(caption):'Create one short tasteful seasonal greeting in Korean or English, with legible editorial typography. No other text or logos.';
+return [style.prompt,season.prompt,layout.prompt,typography,'Output exactly one finished flat postcard artwork, not a mockup, with aspect ratio '+ratio+'. No external frame, hands holding a card, or unrelated objects.'].join('\n');
+}
